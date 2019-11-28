@@ -1,0 +1,31 @@
+defmodule TliveMetricCrd.Main do
+  use GenServer
+  require Logger
+  # require Kazan.Watcher.Event, as: Event
+
+  def start_link(_no) do
+    GenServer.start_link(__MODULE__, :ok, name: Main)
+  end
+
+  @impl true
+  def init(:ok) do
+    Logger.debug("started")
+
+    # server = Kazan.Server.from_kubeconfig("kube.yml")
+
+    require IEx
+    IEx.pry()
+
+    Kazan.Apis.Core.V1.list_namespace!()
+    |> Kazan.Watcher.start_link(send_to: self())
+
+    {:ok, %{}}
+  end
+
+  @impl true
+  def handle_info(any, state \\ []) do
+    Logger.debug("called")
+    IO.inspect(any.object)
+    {:noreply, state}
+  end
+end

@@ -1,0 +1,8 @@
+apiVersion: "foo.tlive/v1"
+kind: ScrapedMetric
+metadata:
+  name: two-metric-test
+spec:
+  source: "/metrics/one"
+  sampleRate: 300
+
