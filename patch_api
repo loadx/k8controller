@@ -1,0 +1,4 @@
+defp param_spec(%{schema: nil, data_type: nil}) do
+  nil
+end
+

@@ -11,13 +11,11 @@ defmodule TliveMetricCrd.Main do
   def init(:ok) do
     Logger.debug("started")
 
-    # server = Kazan.Server.from_kubeconfig("kube.yml")
+    server = Kazan.Server.from_kubeconfig("/home/loadx/src/CRD-k8/tlive_metric_crd/kube.yml")
 
+    foo = self
     require IEx
     IEx.pry()
-
-    Kazan.Apis.Core.V1.list_namespace!()
-    |> Kazan.Watcher.start_link(send_to: self())
 
     {:ok, %{}}
   end
